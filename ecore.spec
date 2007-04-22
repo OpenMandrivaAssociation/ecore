@@ -1,8 +1,6 @@
 %define	name	ecore
-%define	version 0.9.9.025
-%define release %mkrel 0.%{cvsrel}.2
-
-%define cvsrel 20060323
+%define	version 0.9.9.037
+%define release %mkrel 1
 
 %define major 	1
 %define libname %mklibname %{name} %major
@@ -16,7 +14,7 @@ Release: 	%{release}
 License: 	BSD
 Group: 		Graphical desktop/Enlightenment
 URL: 		http://get-e.org/
-Source: 	%{name}-%{cvsrel}.tar.bz2
+Source: 	%{name}-%{version}.tar.bz2
 BuildRoot: 	%{_tmppath}/%{name}-buildroot
 BuildRequires:	evas-devel eet-devel
 BuildRequires:	openssl-devel X11-devel
@@ -32,9 +30,17 @@ This package is part of the Enlightenment DR17 desktop shell.
 %package -n %libname
 Summary: Libraries for the %{name} package
 Group: System/Libraries
+Obsoletes: ecore < 1:0.9.9.037
+Provides: ecore = %{epoch}:%{version}-%{release}
 
 %description -n %libname
 Libraries for %{name}
+
+Ecore is the event/X abstraction layer that makes doing selections,
+Xdnd, general X stuff, event loops, timeouts and idle handlers fast,
+optimized, and convenient.
+
+This package is part of the Enlightenment DR17 desktop shell.
 
 %package -n %libnamedev
 Summary: Headers and development libraries from %{name}
@@ -49,10 +55,9 @@ Provides: %name-devel = %{epoch}:%{version}-%{release}
 
 %prep
 rm -rf $RPM_BUILD_ROOT
-%setup -q -n %name
+%setup -q
 
 %build
-./autogen.sh
 %configure2_5x --disable-ecore-dfb
 %make
 
@@ -67,15 +72,9 @@ rm -rf $RPM_BUILD_ROOT
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%files
-%defattr(-,root,root)
-%doc AUTHORS COPYING README
-%{_bindir}/*test
-%{_bindir}/%{name}_config
-%{_datadir}/%name
-
 %files -n %libname
 %defattr(-,root,root)
+%doc AUTHORS COPYING README
 %{_libdir}/*.so.*
 
 %files -n %libnamedev
@@ -88,6 +87,5 @@ rm -rf $RPM_BUILD_ROOT
 %{_bindir}/%name-config
 %multiarch %multiarch_bindir/%name-config
 %{_datadir}/aclocal/*.m4
-
 
 
