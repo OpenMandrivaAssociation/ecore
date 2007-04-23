@@ -30,22 +30,15 @@ This package is part of the Enlightenment DR17 desktop shell.
 %package -n %libname
 Summary: Libraries for the %{name} package
 Group: System/Libraries
-Obsoletes: ecore < 1:0.9.9.037
-Provides: ecore = %{epoch}:%{version}-%{release}
 
 %description -n %libname
 Libraries for %{name}
-
-Ecore is the event/X abstraction layer that makes doing selections,
-Xdnd, general X stuff, event loops, timeouts and idle handlers fast,
-optimized, and convenient.
-
-This package is part of the Enlightenment DR17 desktop shell.
 
 %package -n %libnamedev
 Summary: Headers and development libraries from %{name}
 Group: Development/Other
 Requires: %libname = %{epoch}:%{version}
+Requires: %name = %{epoch}:%{version}
 Provides: lib%{name}-devel %{epoch}:%{version}-%{release}
 Provides: %name-devel = %{epoch}:%{version}-%{release}
 
@@ -71,9 +64,13 @@ rm -rf $RPM_BUILD_ROOT
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%files -n %libname
+%files
 %defattr(-,root,root)
 %doc AUTHORS COPYING README
+%{_bindir}/%{name}_config
+
+%files -n %libname
+%defattr(-,root,root)
 %{_libdir}/*.so.*
 
 %files -n %libnamedev
@@ -86,5 +83,4 @@ rm -rf $RPM_BUILD_ROOT
 %{_bindir}/%name-config
 %multiarch %multiarch_bindir/%name-config
 %{_datadir}/aclocal/*.m4
-
 
