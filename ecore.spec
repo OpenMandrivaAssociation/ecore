@@ -46,7 +46,6 @@ This package is part of the Enlightenment DR17 desktop shell.
 Summary: Headers and development libraries from %{name}
 Group: Development/Other
 Requires: %libname = %{epoch}:%{version}
-Requires: %name = %{epoch}:%{version}
 Provides: lib%{name}-devel %{epoch}:%{version}-%{release}
 Provides: %name-devel = %{epoch}:%{version}-%{release}
 
