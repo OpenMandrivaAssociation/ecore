@@ -16,7 +16,7 @@ Group: 		Graphical desktop/Enlightenment
 URL: 		http://get-e.org/
 Source: 	%{name}-%{version}.tar.bz2
 BuildRoot: 	%{_tmppath}/%{name}-buildroot
-BuildRequires:	evas-devel eet-devel
+BuildRequires:	evas-devel >= 0.9.9.038, eet-devel >= 0.9.10.038
 BuildRequires:	openssl-devel X11-devel
 BuildRequires:	multiarch-utils
 
