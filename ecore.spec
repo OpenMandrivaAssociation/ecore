@@ -9,6 +9,7 @@
 Summary: 	Enlightenment event/X abstraction layer
 Name: 		%{name}
 Version: 	%{version}
+Epoch:		1
 Release: 	%{release}
 License: 	BSD
 Group: 		Graphical desktop/Enlightenment
@@ -37,9 +38,10 @@ Libraries for %{name}
 %package -n %libnamedev
 Summary: Headers and development libraries from %{name}
 Group: Development/Other
-Requires: %libname = %{version}-%{release}
-Provides: lib%{name}-devel = %{version}-%{release}
+Requires: %libname = %{epoch}:%{version}-%{release}
+Provides: lib%{name}-devel = %{epoch}:%{version}-%{release}
 Provides: %name-devel = %{version}-%{release}
+Provides: %name-devel = %{epoch}:%{version}-%{release}
 
 %description -n %libnamedev
 %{name} development headers and libraries
