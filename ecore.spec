@@ -2,14 +2,13 @@
 %define	version 0.9.9.038
 %define release %mkrel 4
 
-%define major 	1
+%define major 1
 %define libname %mklibname %{name} %major
 %define libnamedev %mklibname %{name} %major -d
 
 Summary: 	Enlightenment event/X abstraction layer
 Name: 		%{name}
 Version: 	%{version}
-Epoch:		1
 Release: 	%{release}
 License: 	BSD
 Group: 		Graphical desktop/Enlightenment
@@ -30,6 +29,7 @@ This package is part of the Enlightenment DR17 desktop shell.
 %package -n %libname
 Summary: Libraries for the %{name} package
 Group: System/Libraries
+Provides: %name = %version-%release
 
 %description -n %libname
 Libraries for %{name}
@@ -37,10 +37,9 @@ Libraries for %{name}
 %package -n %libnamedev
 Summary: Headers and development libraries from %{name}
 Group: Development/Other
-Requires: %libname = %{epoch}:%{version}
-Requires: %name = %{epoch}:%{version}
-Provides: lib%{name}-devel %{epoch}:%{version}-%{release}
-Provides: %name-devel = %{epoch}:%{version}-%{release}
+Requires: %libname = %{version}-%{release}
+Provides: lib%{name}-devel = %{version}-%{release}
+Provides: %name-devel = %{version}-%{release}
 
 %description -n %libnamedev
 %{name} development headers and libraries
