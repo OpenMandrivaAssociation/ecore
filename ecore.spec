@@ -1,6 +1,6 @@
 %define	name	ecore
 %define	version 0.9.9.038
-%define release %mkrel 6
+%define release %mkrel 7
 
 %define major 1
 %define libname %mklibname %{name} %major
