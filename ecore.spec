@@ -1,6 +1,6 @@
 %define	name	ecore
 %define version 0.9.9.041
-%define release %mkrel 3
+%define release %mkrel 4
 
 %define major 1
 %define libname %mklibname %{name} %major
@@ -30,7 +30,6 @@ This package is part of the Enlightenment DR17 desktop shell.
 %package -n %libname
 Summary: Libraries for the %{name} package
 Group: System/Libraries
-Provides: %name = %version-%release
 
 %description -n %libname
 Libraries for %{name}
@@ -51,7 +50,8 @@ rm -rf $RPM_BUILD_ROOT
 %setup -q
 
 %build
-%configure2_5x --enable-ecore-fb
+%configure2_5x --enable-ecore-fb --enable-ecore-desktop --enable-ecore-sdl \
+               --enable-evas-x11-gl
 %make
 
 %install
