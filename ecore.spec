@@ -1,15 +1,15 @@
 %define	name	ecore
 %define version 0.9.9.042
-%define release %mkrel 2
+%define release %mkrel 3
 
-%define major 1
+%define major	0
 %define libname %mklibname %{name} %major
 %define libnamedev %mklibname %{name} -d
 
 Summary: 	Enlightenment event/X abstraction layer
 Name: 		%{name}
 Version: 	%{version}
-Epoch:		1
+Epoch:		3
 Release: 	%{release}
 License: 	BSD
 Group: 		Graphical desktop/Enlightenment
