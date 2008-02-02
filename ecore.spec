@@ -1,6 +1,6 @@
 %define	name	ecore
-%define version 0.9.9.041
-%define release %mkrel 4
+%define version 0.9.9.042
+%define release %mkrel 1
 
 %define major 1
 %define libname %mklibname %{name} %major
@@ -13,12 +13,13 @@ Epoch:		1
 Release: 	%{release}
 License: 	BSD
 Group: 		Graphical desktop/Enlightenment
-URL: 		http://get-e.org/
+URL: 		http://www.enlightenment.org/
 Source: 	%{name}-%{version}.tar.bz2
 BuildRoot: 	%{_tmppath}/%{name}-buildroot
-BuildRequires:	evas-devel >= 0.9.9.041, eet-devel >= 0.9.10.041
-BuildRequires:	openssl-devel X11-devel
-BuildRequires:	multiarch-utils
+BuildRequires:	evas-devel
+BuildRequires:	eet-devel
+BuildRequires:	openssl-devel
+BuildRequires:	X11-devel
 
 %description
 Ecore is the event/X abstraction layer that makes doing selections,
@@ -39,11 +40,10 @@ Summary: Headers and development libraries from %{name}
 Group: Development/Other
 Requires: %libname = %{epoch}:%{version}-%{release}
 Provides: lib%{name}-devel = %{epoch}:%{version}-%{release}
-Provides: %name-devel = %{version}-%{release}
 Provides: %name-devel = %{epoch}:%{version}-%{release}
 
 %description -n %libnamedev
-%{name} development headers and libraries
+%{name} development headers and libraries.
 
 %prep
 rm -rf $RPM_BUILD_ROOT
@@ -57,8 +57,6 @@ rm -rf $RPM_BUILD_ROOT
 %install
 rm -rf $RPM_BUILD_ROOT
 %makeinstall
-cp -v $RPM_BUILD_DIR/%name-%version/%name-config %buildroot/%_bindir/
-%multiarch_binaries %buildroot/%_bindir/%name-config
 
 %post -n %libname -p /sbin/ldconfig
 %postun -n %libname -p /sbin/ldconfig
@@ -82,7 +80,4 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/*.a
 %{_libdir}/*.la
 %{_includedir}/*.h
-%{_bindir}/%name-config
-%multiarch %multiarch_bindir/%name-config
-#%{_datadir}/aclocal/*.m4
 
