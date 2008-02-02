@@ -4,7 +4,7 @@
 
 %define major 1
 %define libname %mklibname %{name} %major
-%define libnamedev %mklibname %{name} %major -d
+%define libnamedev %mklibname %{name} -d
 
 Summary: 	Enlightenment event/X abstraction layer
 Name: 		%{name}
