@@ -50,7 +50,7 @@ rm -rf $RPM_BUILD_ROOT
 %setup -q
 
 %build
-%configure2_5x --enable-ecore-fb
+%configure2_5x --enable-ecore-fb \
 	--enable-ecore-desktop \
 	--enable-ecore-sdl \
 	--enable-openssl \
