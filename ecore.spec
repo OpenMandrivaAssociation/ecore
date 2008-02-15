@@ -1,6 +1,6 @@
 %define	name	ecore
 %define version 0.9.9.042
-%define release %mkrel 3
+%define release %mkrel 4
 
 %define major	0
 %define libname %mklibname %{name} %major
@@ -16,9 +16,9 @@ Group: 		Graphical desktop/Enlightenment
 URL: 		http://www.enlightenment.org/
 Source: 	%{name}-%{version}.tar.bz2
 BuildRoot: 	%{_tmppath}/%{name}-buildroot
-BuildRequires:	evas-devel
-BuildRequires:	eet-devel
-BuildRequires:	openssl-devel
+BuildRequires:	evas-devel >= 0.9.9.042
+BuildRequires:	eet-devel >= 0.9.10.042
+BuildRequires:	openssl-devel curl-devel
 BuildRequires:	X11-devel
 
 %description
@@ -50,8 +50,13 @@ rm -rf $RPM_BUILD_ROOT
 %setup -q
 
 %build
-%configure2_5x --enable-ecore-fb --enable-ecore-desktop --enable-ecore-sdl \
-               --enable-evas-x11-gl
+%configure2_5x --enable-ecore-fb
+	--enable-ecore-desktop \
+	--enable-ecore-sdl \
+	--enable-openssl \
+	--enable-curl \
+	--enable-evas-x11-gl \
+	--enable-ecore-evas-x11-16
 %make
 
 %install
