@@ -17,7 +17,7 @@ URL: 		http://www.enlightenment.org/
 Source: 	http://download.enlightenment.org/snapshots/LATEST/%{name}-%{version}.tar.bz2
 Patch0:		ecore-0.9.9.043-simplify-sdl-libs.patch
 BuildRoot: 	%{_tmppath}/%{name}-buildroot
-BuildRequires:	evas-devel >= 0.9.9.042
+BuildRequires:	evas-devel >= 0.9.9.050
 BuildRequires:	eet-devel >= 0.9.10.042
 BuildRequires:	openssl-devel curl-devel
 BuildRequires:	X11-devel
