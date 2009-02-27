@@ -1,6 +1,6 @@
 %define	name	ecore
 %define version 0.9.9.050
-%define release %mkrel 2
+%define release %mkrel 3
 
 %define major	0
 %define libname %mklibname %{name} %major
@@ -18,7 +18,7 @@ Source: 	http://download.enlightenment.org/snapshots/LATEST/%{name}-%{version}.t
 Patch0:		ecore-0.9.9.043-simplify-sdl-libs.patch
 BuildRoot: 	%{_tmppath}/%{name}-buildroot
 BuildRequires:	evas-devel >= 0.9.9.050
-BuildRequires:	eet-devel >= 0.9.10.042
+BuildRequires:	eet-devel >= 1.1.0
 BuildRequires:	openssl-devel curl-devel
 BuildRequires:	X11-devel
 
