@@ -15,7 +15,7 @@ License: 	BSD
 Group: 		Graphical desktop/Enlightenment
 URL: 		http://www.enlightenment.org/
 Source: 	http://download.enlightenment.org/snapshots/LATEST/%{name}-%{version}.tar.bz2
-Patch0:		ecore-0.9.9.043-simplify-sdl-libs.patch
+Patch0:		ecore-0.9.9.050-simplify-sdl-libs.patch
 BuildRoot: 	%{_tmppath}/%{name}-buildroot
 BuildRequires:	evas-devel >= 0.9.9.050
 BuildRequires:	eet-devel >= 1.1.0
@@ -48,7 +48,7 @@ Provides: %name-devel = %{epoch}:%{version}-%{release}
 
 %prep
 %setup -q
-%patch0 -p0
+#%patch0 -p0
 
 %build
 NOCONFIGURE=1 ./autogen.sh
