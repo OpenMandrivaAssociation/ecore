@@ -1,6 +1,6 @@
 %define	name	ecore
 %define version 0.9.9.050
-%define release %mkrel 5
+%define release %mkrel 6
 
 %define major 0
 %define libname %mklibname %{name} %major
@@ -61,6 +61,12 @@ export CFLAGS="%{optflags} -lX11 -lXext"
 	--enable-ecore-evas-x11-gl \
 	--enable-ecore-fb \
 	--enable-ecore-evas-x11-16
+
+# fix libtool issue on release < 2009.1
+%if %mdkversion < 200910
+perl -pi -e "s/^ECHO.*/ECHO='echo'\necho='echo'\n/" libtool
+%endif
+
 %make
 
 %install
