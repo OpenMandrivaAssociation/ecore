@@ -1,6 +1,6 @@
 %define	name	ecore
 %define version 0.9.9.050
-%define release %mkrel 4
+%define release %mkrel 5
 
 %define major 0
 %define libname %mklibname %{name} %major
@@ -39,9 +39,9 @@ Libraries for %{name}
 %package -n %libnamedev
 Summary: Headers and development libraries from %{name}
 Group: Development/Other
-Requires: %libname = %{version}-%{release}
-Provides: lib%{name}-devel = %{version}-%{release}
-Provides: %name-devel = %{version}-%{release}
+Requires: %libname = %{epoch}:%{version}-%{release}
+Provides: %{name}-devel = %{epoch}:%{version}-%{release}
+Provides: %{name}-devel = %{version}-%{release}
 
 %description -n %libnamedev
 %{name} development headers and libraries.
