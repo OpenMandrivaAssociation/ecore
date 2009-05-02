@@ -1,6 +1,6 @@
 %define	name	ecore
-%define version 0.9.9.050
-%define release %mkrel 6
+%define version 0.9.9.060
+%define release %mkrel 1
 
 %define major 0
 %define libname %mklibname %{name} %major
@@ -15,7 +15,6 @@ License: 	BSD
 Group: 		Graphical desktop/Enlightenment
 URL: 		http://www.enlightenment.org/
 Source: 	http://download.enlightenment.org/snapshots/LATEST/%{name}-%{version}.tar.bz2
-Patch0:		ecore-0.9.9.050-simplify-sdl-libs.patch
 BuildRoot: 	%{_tmppath}/%{name}-buildroot
 BuildRequires:	evas-devel >= 0.9.9.050
 BuildRequires:	eet-devel >= 1.1.0
@@ -48,11 +47,8 @@ Provides: %{name}-devel = %{version}-%{release}
 
 %prep
 %setup -q
-#%patch0 -p0
 
 %build
-NOCONFIGURE=1 ./autogen.sh
-export CFLAGS="%{optflags} -lX11 -lXext"
 %configure2_5x --enable-ecore-fb \
 	--enable-ecore-desktop \
 	--enable-ecore-sdl \
@@ -71,7 +67,7 @@ perl -pi -e "s/^ECHO.*/ECHO='echo'\necho='echo'\n/" libtool
 
 %install
 rm -rf $RPM_BUILD_ROOT
-%makeinstall
+%makeinstall_std
 
 %if %mdkversion < 200900
 %post -n %libname -p /sbin/ldconfig
@@ -99,4 +95,3 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/*.a
 %{_libdir}/*.la
 %{_includedir}/*.h
-
