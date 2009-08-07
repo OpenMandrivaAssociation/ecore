@@ -1,6 +1,6 @@
 %define	name	ecore
 %define version 0.9.9.062
-%define release %mkrel 1
+%define release %mkrel 2
 
 %define major 0
 %define libname %mklibname %{name} %major
@@ -20,6 +20,7 @@ BuildRequires:	evas-devel >= 0.9.9.050
 BuildRequires:	eet-devel >= 1.1.0
 BuildRequires:	openssl-devel curl-devel
 BuildRequires:	X11-devel
+BuildRequires:	SDL-devel
 
 %description
 Ecore is the event/X abstraction layer that makes doing selections,
