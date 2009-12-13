@@ -1,6 +1,6 @@
 %define	name	ecore
-%define version 0.9.9.062
-%define release %mkrel 3
+%define version 0.9.9.063
+%define release %mkrel 1
 
 %define major 0
 %define libname %mklibname %{name} %major
@@ -70,6 +70,8 @@ perl -pi -e "s/^ECHO.*/ECHO='echo'\necho='echo'\n/" libtool
 rm -rf $RPM_BUILD_ROOT
 %makeinstall_std
 
+%find_lang %name
+
 %if %mdkversion < 200900
 %post -n %libname -p /sbin/ldconfig
 %endif
@@ -80,7 +82,7 @@ rm -rf $RPM_BUILD_ROOT
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%files
+%files -f %name.lang
 %defattr(-,root,root)
 %doc AUTHORS COPYING README
 %{_bindir}/%{name}_config
