@@ -51,13 +51,9 @@ Provides: %{name}-devel = %{version}-%{release}
 
 %build
 %configure2_5x --enable-ecore-fb \
-	--enable-ecore-desktop \
 	--enable-ecore-sdl \
 	--enable-openssl \
-	--enable-curl \
-	--enable-ecore-evas-x11-gl \
-	--enable-ecore-fb \
-	--enable-ecore-evas-x11-16
+	--enable-curl
 
 # fix libtool issue on release < 2009.1
 %if %mdkversion < 200910
