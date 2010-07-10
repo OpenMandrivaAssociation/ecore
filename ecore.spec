@@ -20,6 +20,7 @@ BuildRequires:	evas-devel >= 0.9.9.050
 BuildRequires:	eet-devel >= 1.1.0
 BuildRequires:	openssl-devel curl-devel
 BuildRequires:	X11-devel
+BuildRequires:	tslib-devel
 BuildRequires:	SDL-devel
 
 %description
@@ -81,7 +82,6 @@ rm -rf $RPM_BUILD_ROOT
 %files -f %name.lang
 %defattr(-,root,root)
 %doc AUTHORS COPYING README
-%{_bindir}/%{name}_config
 
 %files -n %libname
 %defattr(-,root,root)
