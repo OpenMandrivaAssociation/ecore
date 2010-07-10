@@ -1,5 +1,5 @@
 %define	name	ecore
-%define version 0.9.9.063
+%define version 0.9.9.49898
 %define release %mkrel 1
 
 %define major 0
