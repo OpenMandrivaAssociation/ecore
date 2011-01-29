@@ -1,6 +1,6 @@
 %define	name	ecore
 %define version 1.0.0
-%define release %mkrel -c beta3 1
+%define release %mkrel 1
 
 %define major 1
 %define libname %mklibname %{name} %major
@@ -14,7 +14,7 @@ Release: 	%{release}
 License: 	BSD
 Group: 		Graphical desktop/Enlightenment
 URL: 		http://www.enlightenment.org/
-Source: 	http://download.enlightenment.org/releases/%{name}-%{version}.beta3.tar.bz2
+Source: 	http://download.enlightenment.org/releases/%{name}-%{version}.tar.bz2
 BuildRoot: 	%{_tmppath}/%{name}-buildroot
 BuildRequires:	evas-devel >= 1.0.0
 BuildRequires:	eet-devel >= 1.4.0
@@ -59,18 +59,13 @@ Provides: %{name}-devel = %{version}-%{release}
 %{name} development headers and libraries.
 
 %prep
-%setup -qn %{name}-%{version}.beta3
+%setup -qn %{name}-%{version}
 
 %build
 %configure2_5x --enable-ecore-fb \
 	--enable-ecore-sdl \
 	--enable-openssl \
 	--enable-curl
-
-# fix libtool issue on release < 2009.1
-%if %mdkversion < 200910
-perl -pi -e "s/^ECHO.*/ECHO='echo'\necho='echo'\n/" libtool
-%endif
 
 %make
 
