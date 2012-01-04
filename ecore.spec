@@ -14,8 +14,8 @@
 %define snapshot 1
 
 %if %snapshot
-%define	svndate	20110825
-%define	svnrev	62785
+%define	svndate	20120103
+%define	svnrev	66771
 %endif
 
 
@@ -52,7 +52,7 @@ BuildRequires:	pkgconfig(libcares)
 BuildRequires:	pkgconfig(libcurl)
 BuildRequires:	pkgconfig(sdl)
 BuildRequires:	pkgconfig(tslib-0.0)
-BuildRequires:	pkgocnfig(x11)
+BuildRequires:	pkgconfig(x11)
 BuildRequires:	pkgconfig(xcomposite)
 BuildRequires:	pkgconfig(xcursor)
 BuildRequires:	pkgconfig(xdamage)
@@ -104,7 +104,6 @@ NOCONFIGURE=yes ./autogen.sh
 	--enable-ecore-x \
 	--enable-ecore-fb \
 	--enable-ecore-directfb \
-	--enable-ecore-desktop \
 	--enable-ecore-con \
 	--enable-ecore-file \
 	--enable-ecore-sdl \
@@ -123,12 +122,11 @@ NOCONFIGURE=yes ./autogen.sh
 %install
 rm -rf %{buildroot}
 %makeinstall_std
-
+find %{buildroot} -type f -name "*.la" -exec rm -f {} ';'
 %find_lang %{name}
 
 %files -f %{name}.lang
 %doc AUTHORS COPYING README
-%{_bindir}/ecore_test
 %{_libdir}/ecore/immodules/xim.so
 
 %files -n %{libname}
