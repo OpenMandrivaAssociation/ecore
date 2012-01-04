@@ -1,38 +1,69 @@
-%define	name	ecore
-%define version 1.0.1
-%define release %mkrel 1
+#Tarball of svn snapshot created as follows...
+#Cut and paste in a shell after removing initial #
 
-%define major 1
-%define libname %mklibname %{name} %major
-%define libnamedev %mklibname %{name} -d
+#svn co http://svn.enlightenment.org/svn/e/trunk/ecore ecore; \
+#cd ecore; \
+#SVNREV=$(LANGUAGE=C svn info | grep "Last Changed Rev:" | cut -d: -f 2 | sed "s@ @@"); \
+#v_maj=$(cat configure.ac | grep 'm4_define(\[v_maj\],' | cut -d' ' -f 2 | cut -d[ -f 2 | cut -d] -f 1); \
+#v_min=$(cat configure.ac | grep 'm4_define(\[v_min\],' | cut -d' ' -f 2 | cut -d[ -f 2 | cut -d] -f 1); \
+#v_mic=$(cat configure.ac | grep 'm4_define(\[v_mic\],' | cut -d' ' -f 2 | cut -d[ -f 2 | cut -d] -f 1); \
+#PKG_VERSION=$v_maj.$v_min.$v_mic.$SVNREV; \
+#cd ..; \
+#tar -Jcf ecore-$PKG_VERSION.tar.xz ecore/ --exclude .svn --exclude .*ignore
 
-Summary: 	Enlightenment event/X abstraction layer
-Name: 		%{name}
-Version: 	%{version}
-Epoch:		3
-Release: 	%{release}
-License: 	BSD
-Group: 		Graphical desktop/Enlightenment
-URL: 		http://www.enlightenment.org/
-Source: 	http://download.enlightenment.org/releases/%{name}-%{version}.tar.bz2
-BuildRoot: 	%{_tmppath}/%{name}-buildroot
-BuildRequires:	evas-devel >= 1.0.0
-BuildRequires:	eet-devel >= 1.4.0
-BuildRequires:	openssl-devel curl-devel
-BuildRequires: libx11-devel
-BuildRequires: libxcomposite-devel
-BuildRequires: libxcursor-devel
-BuildRequires: libxdamage-devel
-BuildRequires: libxext-devel
-BuildRequires: libxfixes-devel
-BuildRequires: libxi-devel
-BuildRequires: libxinerama-devel
-BuildRequires: libxrandr-devel
-BuildRequires: libxrender-devel
-BuildRequires: libxscrnsaver-devel
-BuildRequires: libxtst-devel
-BuildRequires:	tslib-devel
-BuildRequires:	SDL-devel
+%define snapshot 1
+
+%if %snapshot
+%define	svndate	20110825
+%define	svnrev	62785
+%endif
+
+
+%define	major 1
+%define	libname %mklibname %{name} %major
+%define	develname %mklibname %{name} -d
+
+Summary:	Enlightenment event/X abstraction layer
+Name:		ecore
+%if %snapshot
+Version:	1.1.99.%{svnrev}
+Release:	0.%{svndate}.1
+%else
+Version:	1.1.0
+Release:	1
+%endif
+License:	BSD
+Group:		Graphical desktop/Enlightenment
+URL:		http://www.enlightenment.org/
+%if %snapshot
+Source0:	%{name}-%{version}.tar.xz
+%else
+Source0:	http://download.enlightenment.org/releases/%{name}-%{version}.tar.xz
+%endif
+
+BuildRequires:	gettext-devel
+BuildRequires:	gpm-devel
+BuildRequires:	pkgconfig(directfb)
+BuildRequires:	pkgconfig(eet) >= 1.4.0
+BuildRequires:	pkgconfig(eina) >= 1.0.0
+BuildRequires:	pkgconfig(evas) >= 1.0.0
+BuildRequires:	pkgconfig(gnutls)
+BuildRequires:	pkgconfig(libcares)
+BuildRequires:	pkgconfig(libcurl)
+BuildRequires:	pkgconfig(sdl)
+BuildRequires:	pkgconfig(tslib-0.0)
+BuildRequires:	pkgocnfig(x11)
+BuildRequires:	pkgconfig(xcomposite)
+BuildRequires:	pkgconfig(xcursor)
+BuildRequires:	pkgconfig(xdamage)
+BuildRequires:	pkgconfig(xext)
+BuildRequires:	pkgconfig(xfixes)
+BuildRequires:	pkgconfig(xi)
+BuildRequires:	pkgconfig(xinerama)
+BuildRequires:	pkgconfig(xrandr)
+BuildRequires:	pkgconfig(xrender)
+BuildRequires:	pkgconfig(xscrnsaver)
+BuildRequires:	pkgconfig(xtst)
 
 %description
 Ecore is the event/X abstraction layer that makes doing selections,
@@ -41,62 +72,70 @@ optimized, and convenient.
 
 This package is part of the Enlightenment DR17 desktop shell.
 
-%package -n %libname
-Summary: Libraries for the %{name} package
-Group: System/Libraries
+%package -n %{libname}
+Summary:	Libraries for the %{name} package
+Group:		System/Libraries
 
-%description -n %libname
+%description -n %{libname}
 Libraries for %{name}
 
-%package -n %libnamedev
-Summary: Headers and development libraries from %{name}
-Group: Development/Other
-Requires: %libname = %{epoch}:%{version}-%{release}
-Provides: %{name}-devel = %{epoch}:%{version}-%{release}
-Provides: %{name}-devel = %{version}-%{release}
+%package -n %{develname}
+Summary:	Headers and development libraries from %{name}
+Group:		Development/Other
+Requires:	%{libname} = %{version}-%{release}
+Provides:	%{name}-devel = %{version}-%{release}
 
-%description -n %libnamedev
+%description -n %{develname}
 %{name} development headers and libraries.
 
 %prep
-%setup -qn %{name}-%{version}
+%if %snapshot
+%setup -qn %{name}
+%else
+%setup -q
+%endif
 
 %build
-%configure2_5x --enable-ecore-fb \
+%if %snapshot
+NOCONFIGURE=yes ./autogen.sh
+%endif
+
+%configure2_5x \
+	--enable-ecore-x \
+	--enable-ecore-fb \
+	--enable-ecore-directfb \
+	--enable-ecore-desktop \
+	--enable-ecore-con \
+	--enable-ecore-file \
 	--enable-ecore-sdl \
-	--enable-openssl \
-	--enable-curl
+	--enable-ecore-evas \
+	--enable-ecore-evas-fb \
+	--enable-ecore-evas-software-x11 \
+	--enable-ecore-evas-opengl-x11 \
+	--enable-ecore-evas-software-16-x11 \
+	--enable-gnutls \
+	--enable-curl \
+	--enable-cares \
+	--disable-static
 
 %make
 
 %install
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 %makeinstall_std
 
-%find_lang %name
+%find_lang %{name}
 
-%if %mdkversion < 200900
-%post -n %libname -p /sbin/ldconfig
-%endif
-%if %mdkversion < 200900
-%postun -n %libname -p /sbin/ldconfig
-%endif
-
-%clean
-rm -rf $RPM_BUILD_ROOT
-
-%files -f %name.lang
-%defattr(-,root,root)
+%files -f %{name}.lang
 %doc AUTHORS COPYING README
+%{_bindir}/ecore_test
+%{_libdir}/ecore/immodules/xim.so
 
-%files -n %libname
-%defattr(-,root,root)
+%files -n %{libname}
 %{_libdir}/*.so.%{major}*
 
-%files -n %libnamedev
-%defattr(-,root,root)
+%files -n %{develname}
 %{_libdir}/pkgconfig/*
 %{_libdir}/*.so
-%{_libdir}/*.a
-%{_libdir}/*.la
-%{_includedir}/*
+%{_includedir}/ecore*
+
