@@ -25,6 +25,7 @@
 
 Summary:	Enlightenment event/X abstraction layer
 Name:		ecore
+Epoch:		3
 %if %snapshot
 Version:	1.1.99.%{svnrev}
 Release:	0.%{svndate}.1
@@ -82,8 +83,8 @@ Libraries for %{name}
 %package -n %{develname}
 Summary:	Headers and development libraries from %{name}
 Group:		Development/Other
-Requires:	%{libname} = %{version}-%{release}
-Provides:	%{name}-devel = %{version}-%{release}
+Requires:	%{libname} = %{EVRD}
+Provides:	%{name}-devel = %{EVRD}
 
 %description -n %{develname}
 %{name} development headers and libraries.
