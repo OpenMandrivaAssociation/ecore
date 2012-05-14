@@ -31,7 +31,7 @@ Version:	1.1.99.%{svnrev}
 Release:	0.%{svndate}.1
 %else
 Version:	1.1.0
-Release:	1
+Release:	2
 %endif
 License:	BSD
 Group:		Graphical desktop/Enlightenment
