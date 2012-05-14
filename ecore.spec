@@ -28,10 +28,10 @@ Name:		ecore
 Epoch:		3
 %if %snapshot
 Version:	1.1.99.%{svnrev}
-Release:	0.%{svndate}.2
+Release:	0.%{svndate}.3
 %else
 Version:	1.1.0
-Release:	2
+Release:	3
 %endif
 License:	BSD
 Group:		Graphical desktop/Enlightenment
