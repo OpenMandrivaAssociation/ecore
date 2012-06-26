@@ -11,7 +11,7 @@
 #cd ..; \
 #tar -Jcf ecore-$PKG_VERSION.tar.xz ecore/ --exclude .svn --exclude .*ignore
 
-%define snapshot 1
+%define snapshot 0
 
 %if %snapshot
 %define	svndate	20120103
@@ -30,8 +30,8 @@ Epoch:		3
 Version:	1.1.99.%{svnrev}
 Release:	0.%{svndate}.3
 %else
-Version:	1.1.0
-Release:	3
+Version:	1.2.1
+Release:	1
 %endif
 License:	BSD
 Group:		Graphical desktop/Enlightenment
@@ -39,7 +39,7 @@ URL:		http://www.enlightenment.org/
 %if %snapshot
 Source0:	%{name}-%{version}.tar.xz
 %else
-Source0:	http://download.enlightenment.org/releases/%{name}-%{version}.tar.xz
+Source0:	http://download.enlightenment.org/releases/%{name}-%{version}.tar.gz
 %endif
 
 BuildRequires:	gettext-devel
