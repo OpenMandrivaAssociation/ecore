@@ -6,7 +6,7 @@ Summary:	Enlightenment event/X abstraction layer
 Name:		ecore
 Epoch:		3
 Version:	1.7.5
-Release:	1
+Release:	2
 License:	BSD
 Group:		Graphical desktop/Enlightenment
 URL:		http://www.enlightenment.org/
