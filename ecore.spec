@@ -6,7 +6,7 @@ Summary:	Enlightenment event/X abstraction layer
 Name:		ecore
 Epoch:		3
 Version:	1.7.8
-Release:	2
+Release:	3
 License:	BSD
 Group:		Graphical desktop/Enlightenment
 Url:		http://www.enlightenment.org/
@@ -14,6 +14,7 @@ Source0:	http://download.enlightenment.fr/releases/%{name}-%{version}.tar.bz2
 
 BuildRequires:	gettext-devel
 BuildRequires:	gpm-devel
+BuildRequires:	pkgconfig(directfb)
 BuildRequires:	pkgconfig(eet) >= 1.4.0
 BuildRequires:	pkgconfig(eina) >= 1.0.0
 BuildRequires:	pkgconfig(evas) >= 1.0.0
@@ -65,6 +66,7 @@ Provides:	%{name}-devel = %{EVRD}
 %configure \
 	--enable-ecore-x \
 	--enable-ecore-fb \
+    --enable-ecore-directfb \
 	--enable-ecore-con \
 	--enable-ecore-file \
 	--enable-ecore-sdl \
