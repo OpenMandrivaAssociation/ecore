@@ -6,7 +6,7 @@ Summary:	Enlightenment event/X abstraction layer
 Name:		ecore
 Epoch:		3
 Version:	1.7.8
-Release:	3
+Release:	4
 License:	BSD
 Group:		Graphical desktop/Enlightenment
 Url:		http://www.enlightenment.org/
@@ -60,13 +60,13 @@ Provides:	%{name}-devel = %{EVRD}
 %{name} development headers and libraries.
 
 %prep
-%setup -q
+%autosetup -p1
 
 %build
 %configure \
 	--enable-ecore-x \
 	--enable-ecore-fb \
-    --enable-ecore-directfb \
+	--enable-ecore-directfb \
 	--enable-ecore-con \
 	--enable-ecore-file \
 	--enable-ecore-sdl \
@@ -81,22 +81,22 @@ Provides:	%{name}-devel = %{EVRD}
 	--enable-cares \
 	--disable-static
 
-%make
+%make_build
 
 %install
-%makeinstall_std
+%make_install
 
 %find_lang %{name}
 
 %files -f %{name}.lang
-%doc AUTHORS COPYING README
+%dir %{_libdir}/ecore
 %{_libdir}/ecore/immodules/xim.so
 
 %files -n %{libname}
 %{_libdir}/*.so.%{major}*
 
 %files -n %{devname}
+%doc AUTHORS COPYING README
 %{_libdir}/pkgconfig/*
 %{_libdir}/*.so
 %{_includedir}/ecore*
-
